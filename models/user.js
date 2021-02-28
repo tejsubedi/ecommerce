@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    hashed_passwrod: {
+    hashed_password: {
         type: String,
         required: true
     },
@@ -43,7 +43,7 @@ userSchema.virtual('password')
     .set(function (password) {
         this._password = password
         this.salt = uuidv1()
-        this.hashed_passwrod = this.encryptPassword(password)
+        this.hashed_password = this.encryptPassword(password)
     })
     .get(function () {
         return this._password
@@ -57,7 +57,7 @@ userSchema.methods = {
                 .update(password)
                 .digest('hex')
         } catch (err) {
-            return "";
+            return '';
         }
     }
 }
